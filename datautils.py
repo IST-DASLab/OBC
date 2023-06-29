@@ -94,7 +94,7 @@ def get_loaders(
             batchsize = 16
         import bertsquad
         set_seed(seed)
-        return bertsquad.get_dataloader(batchsize), None
+        return bertsquad.get_dataloader(batchsize, nsamples), None
 
     if not path:
         for path in DEFAULT_PATHS[name]:
