@@ -89,6 +89,12 @@ python spdy.py rn18 imagenet 8 mixed --dp
 python postproc.py rn18 imagenet rn18_mixed_800x_dp.txt --database mixed --bnt
 ```
 
+# BERT
+
+Before using our BERT integration, please download our [pretrained checkpoints](https://seafile.ist.ac.at/d/c155c45712ad4bcb9341/) and move them to the `bertsquad` folder.
+Then you should be able to use most features described above by passing `bertsquad` (or `bertsquad6` for smaller variants) as the model name and `squad` as the dataset name.
+The code was tested with `transformers==4.21.2` and `datasets==1.17.0`.
+
 # BibTex
 
 ```
