@@ -1,7 +1,9 @@
 # Optimal Brain Compression
 
 This repository contains efficient implementations of ExactOBS for quantization,
-unstructured-, block- and N:M pruning.
+unstructured-, block- and N:M pruning, introduced in the NeurIPS 2022 paper 
+"Optimal Brain Compression: A Framework for Accurate Post-Training Quantization 
+and Pruning".
 
 ## Files
 
@@ -85,4 +87,16 @@ python main_trueobs.py rn18 imagenet quant --wbits 4 --abits 4 --load models_nm/
 python database.py rn18 imagenet mixed loss
 python spdy.py rn18 imagenet 8 mixed --dp
 python postproc.py rn18 imagenet rn18_mixed_800x_dp.txt --database mixed --bnt
+```
+
+# BibTex
+
+```
+@article{frantar2022obc,
+  title={{Optimal Brain Compression:} A Framework for Accurate Post-Training Quantization and Pruning},
+  author={Frantar, Elias and Singh, Sidak Pal and Alistarh, Dan},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2022}
+}
 ```
