@@ -15,7 +15,7 @@ DEBUG = False
 
 class TrueOBS:
 
-    def __init__(self, layer):
+    def __init__(self, layer, rel_damp=0):
         self.layer = layer
         self.dev = self.layer.weight.device
         W = layer.weight.data.clone()
@@ -26,6 +26,7 @@ class TrueOBS:
         # Accumulate in double precision
         self.H = torch.zeros((self.columns, self.columns), device=self.dev, dtype=torch.double)
         self.nsamples = 0
+        self.rel_damp = rel_damp
 
     def add_batch(self, inp, out):
         if DEBUG:
@@ -70,6 +71,9 @@ class TrueOBS:
         if isinstance(self.layer, nn.Conv2d):
             W = W.flatten(1)
         H = self.H.float()
+        if self.rel_damp > 0:
+            damp = self.rel_damp * torch.diag(H).mean()
+            H += damp * torch.eye(H.shape[0], device=self.dev)
         dead = torch.diag(H) == 0
         H[dead, dead] = 1
         W[:, dead] = 0

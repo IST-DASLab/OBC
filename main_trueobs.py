@@ -36,6 +36,7 @@ parser.add_argument('--wasym', action='store_true')
 parser.add_argument('--wminmax', action='store_true')
 parser.add_argument('--asym', action='store_true')
 parser.add_argument('--aminmax', action='store_true')
+parser.add_argument('--rel-damp', type=float, default=0)
 
 parser.add_argument('--prunen', type=int, default=2)
 parser.add_argument('--prunem', type=int, default=4)
@@ -94,7 +95,7 @@ for name in layersp:
     layer = layersp[name]
     if isinstance(layer, ActQuantWrapper):
         layer = layer.module
-    trueobs[name] = TrueOBS(layer)
+    trueobs[name] = TrueOBS(layer, rel_damp=args.rel_damp)
     if aquant:
         layersp[name].quantizer.configure(
             args.abits, sym=args.asym, mse=not args.aminmax
